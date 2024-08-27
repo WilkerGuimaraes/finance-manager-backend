@@ -13,7 +13,7 @@ model Transaction {
   type        String
   category    String
   price       Decimal
-  createdAt   DateTime
+  createdAt   DateTime @default(now())
 
   @@map("transactions")
 }
