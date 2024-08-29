@@ -28,6 +28,14 @@ export async function getTransactions(app: FastifyInstance) {
       skip: offset,
     });
 
-    return reply.send({ transactions });
+    const count = await prisma.transaction.count({
+      where: {
+        description: {
+          contains: description?.toLocaleLowerCase(),
+        },
+      },
+    });
+
+    return reply.send({ transactions, count });
   });
 }
